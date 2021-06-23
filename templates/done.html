@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <title>Keypad GUI</title>
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <div id="app" style="height: 100%; overflow: hidden">
+        <v-toolbar  color="#3D8A55">
+            <v-toolbar-title style="font-family: Roboto">Keypad GUI</v-toolbar-title>
+        </v-toolbar>
+        <v-app>
+          <v-container>
+            <v-card class="px-5">
+              <v-card-title>Done!</v-card-title>
+              <div class="button-7">
+                <div class="eff-7"></div>
+                <a href="http://127.0.0.1:13004/"> Flash Another </a>
+              </div>
+              <br>
+              <br>
+              <br>
+            </v-card>
+          </v-container>
+        </v-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          Keys: ["none", "space", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "=", "`", "[", "]", "\\", ";", "'", ",", ".", "/", "!", "@", "#", "$", "%", "^", 
+            "&", "*", "(", ")", "_", "+", "{", "}", "|", ":", "\"", "<", ">", "?",  "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", 
+            "f12", "insert", "delete", "backspace", "enter", "home", "end", "pgup", "pgdn", "up", "down", "left", "right", "tab", "Caps Lock", "esc"],
+           Modifers: ["none", "shift", "ctrl", "alt", "Windows"]
+        },
+
+        vuetify: new Vuetify({
+          theme: {
+            dark: true
+          }
+        }),
+      })
+    </script>
+</body>
+</html>

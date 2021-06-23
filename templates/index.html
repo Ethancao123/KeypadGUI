@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <title>Keypad GUI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <div id="app" style="height: 100%; overflow: hidden">
+        <v-toolbar  color="#3D8A55">
+            <v-toolbar-title style="font-family: Roboto">Keypad GUI</v-toolbar-title>
+        </v-toolbar>
+        <v-app>
+          <v-container>
+
+            <v-card class="px-5">
+              <v-card-title>Current Keymap</v-card-title>
+
+            </v-card>
+
+
+
+            <!-- Keys-->
+            <v-card class="px-5">
+              <v-card-title>Keys</v-card-title>
+              <v-container class="d-flex flex-row">
+                <v-select
+                  value="none"
+                  :items="Keys"
+                  label="Key 1"></v-select>
+                <v-spacer></v-spacer>
+                <v-select
+                  value="none"
+                  :items="Keys"
+                  label="Key 2"></v-select>
+                <v-spacer></v-spacer>
+                <v-select
+                  value="none"
+                  :items="Keys"
+                  label="Key 3"></v-select>
+                <v-spacer></v-spacer>
+                <v-select
+                  value="none"
+                  :items="Keys"
+                  label="Key 4"></v-select>
+              </v-container>
+            </v-card>
+
+
+
+            <!-- Modifier Key 1-->
+            <v-card class="px-5">
+              <v-card-title>Modifier 1</v-card-title>
+              <v-container class="d-flex flex-row">
+                <v-select
+                  value="none"
+                  :items="Modifiers"
+                  label="Key 1"></v-select>
+                <v-spacer></v-spacer>
+                <v-select
+                  value="none"
+                  :items="Modifiers"
+                  label="Key 2"></v-select>
+                <v-spacer></v-spacer>
+                <v-select
+                  value="none"
+                  :items="Modifiers"
+                  label="Key 3"></v-select>
+                <v-spacer></v-spacer>
+                <v-select
+                  value="none"
+                  :items="Modifiers"
+                  label="Key 4"></v-select>
+              </v-container>
+            </v-card>
+
+
+
+            <!-- Modifier Key 2-->
+            <v-card class="px-5">
+              <v-card-title>Modifier 2</v-card-title>
+              <v-container class="d-flex flex-row">
+                <v-select
+                  value="none"
+                  :items="Modifiers"
+                  label="Key 1"></v-select>
+                <v-spacer></v-spacer>
+                <v-select
+                  value="none"
+                  :items="Modifiers"
+                  label="Key 2"></v-select>
+                <v-spacer></v-spacer>
+                <v-select
+                  value="none"
+                  :items="Modifiers"
+                  label="Key 3"></v-select>
+                <v-spacer></v-spacer>
+                <v-select
+                  value="none"
+                  :items="Modifiers"
+                  label="Key 4"></v-select>
+              </v-container>
+            </v-card>
+
+
+            <v-card class="px-5">
+              <v-card-title></v-card-title>
+              <v-container class="d-flex flex-row">
+                <form action = "http://127.0.0.1:13004/flash" method = "post">
+                  <p><input type = "submit" value = "flash" /></p>
+                </form>
+                <v-btn click="getData"></v-btn>
+              </v-container>
+            </v-card>
+          </v-container>
+        </v-app>
+
+       
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          Keys: ["none", "space", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "=", "`", "[", "]", "\\", ";", "'", ",", ".", "/", "!", "@", "#", "$", "%", "^", 
+            "&", "*", "(", ")", "_", "+", "{", "}", "|", ":", "\"", "<", ">", "?",  "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", 
+            "f12", "insert", "delete", "backspace", "enter", "home", "end", "pgup", "pgdn", "up", "down", "left", "right", "tab", "Caps Lock", "esc"],
+          Modifiers: ["none", "shift", "ctrl", "alt", "Windows"]
+        },
+        methods: {
+          getData(){
+          fetch('http://127.0.0.1:13004/', {
+         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+           console.error('Error:', error);
+        });
+      }
+        }, 
+
+        vuetify: new Vuetify({
+          theme: {
+            dark: true
+          }
+        }),
+      })
+    </script>
+</body>
+
+<template>
+  <transition name="snackbar-anim">
+    <div v-if="snackbarActive" :style="{ backgroundColor }" class="snackbar">
+      <span class="snackbar-text">{{ text }}</span>
+    </div>
+  </transition>
+</template>
+
+</html>
